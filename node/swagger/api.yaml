@@ -1,0 +1,25 @@
+openapi: 3.0.0
+info:
+  description: Provides a catcher for API requests to localhost
+  version: 0.0.1
+  title: Target Dummy API Server
+tags:
+  - name: updates
+    description: Device Updates
+paths:
+  /ping:
+    get:
+      tags:
+        - ping
+      summary: Responds with a pong when the service is running
+      description: ""
+      operationId: pingPong
+      responses:
+        "200":
+          description: Pong success!
+        "500":
+          description: No Pong for you!
+servers:
+  - url: http://localhost:4000/api/v1
+components:
+  schemas:

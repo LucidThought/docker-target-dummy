@@ -1,0 +1,16 @@
+# Ignore the mapped files
+node/assets/
+node/node_modules/*
+node_modules/*
+
+
+# Ignore built js files
+node/build/*
+
+# Ignore asset files
+assets/*
+!assets/PLACEHOLDER.md
+
+# Ignore certificates
+tls/*
+!tls/README.md

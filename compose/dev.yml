@@ -1,0 +1,40 @@
+version: "3.5"
+services:
+  dummy-api:
+    image: node:lts-alpine
+    container_name: dummy-api
+    user: node
+    restart: always
+    working_dir: /home/node/app
+    volumes:
+      - ./node:/home/node/app
+      - ./assets:/home/node/assets
+      - ./tls:/home/node/tls
+    ports:
+      - 4000:4000
+    environment:
+      NODE_ENV: dev
+      PORT: 4000
+      TLS_ENABLED: "false"
+      TLS_CERT_FILE: Certificate.crt
+      TLS_KEY_FILE: Private.key
+      TLS_CA_FILE: Bundle.pem
+      NODEMAILER_HOST: ""
+      NODEMAILER_PORT: ""
+      NODEMAILER_USER: ""
+      NODEMAILER_PASS: ""
+      EMAIL_FROM: ""
+      EMAIL_TO: ""
+      EMAIL_CC: ""
+    command: npm run dev
+  swagger:
+    image: swaggerapi/swagger-ui
+    restart: always
+    depends_on:
+      - dummy-api
+    ports:
+      - 8086:8080
+    volumes:
+      - ./node/swagger:/data
+    environment:
+      SWAGGER_JSON: /data/api.yaml
